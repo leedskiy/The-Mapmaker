@@ -11,7 +11,7 @@ export const elements = [
     },
     {
         time: 2,
-        type: 'town',
+        type: 'village',
         shape:
             [[1, 1, 1],
             [0, 0, 0],
@@ -31,7 +31,7 @@ export const elements = [
     },
     {
         time: 2,
-        type: 'farm',
+        type: 'plains',
         shape:
             [[1, 1, 1],
             [0, 0, 1],
@@ -51,7 +51,7 @@ export const elements = [
     },
     {
         time: 2,
-        type: 'town',
+        type: 'village',
         shape:
             [[1, 1, 1],
             [0, 1, 0],
@@ -61,7 +61,7 @@ export const elements = [
     },
     {
         time: 2,
-        type: 'farm',
+        type: 'plains',
         shape:
             [[1, 1, 1],
             [0, 1, 0],
@@ -71,7 +71,7 @@ export const elements = [
     },
     {
         time: 1,
-        type: 'town',
+        type: 'village',
         shape:
             [[1, 1, 0],
             [1, 0, 0],
@@ -81,7 +81,7 @@ export const elements = [
     },
     {
         time: 1,
-        type: 'town',
+        type: 'village',
         shape:
             [[1, 1, 1],
             [1, 1, 0],
@@ -91,7 +91,7 @@ export const elements = [
     },
     {
         time: 1,
-        type: 'farm',
+        type: 'plains',
         shape:
             [[1, 1, 0],
             [0, 1, 1],
@@ -101,7 +101,7 @@ export const elements = [
     },
     {
         time: 1,
-        type: 'farm',
+        type: 'plains',
         shape:
             [[0, 1, 0],
             [1, 1, 1],

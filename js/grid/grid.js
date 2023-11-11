@@ -1,4 +1,4 @@
-import { Cell } from "./cell.js";
+import { GridCell } from "./gridCell.js";
 import { mountains } from "../data/mountains.js";
 
 export class GridClass {
@@ -14,7 +14,7 @@ export class GridClass {
             let row = [];
 
             for (let j = 0; j < 11; j++) {
-                let cell = new Cell(i, j, "base");
+                let cell = new GridCell(i, j, "base");
                 row.push(cell);
             }
 

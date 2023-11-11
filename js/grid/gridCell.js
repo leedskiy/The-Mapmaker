@@ -1,4 +1,4 @@
-export class Cell {
+export class GridCell {
     #row;
     #col;
     #type;

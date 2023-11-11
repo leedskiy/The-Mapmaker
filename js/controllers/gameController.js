@@ -4,8 +4,8 @@ import { elements } from "../data/elements.js";
 import { displayController } from "./displayController.js";
 
 export const gameController = (() => {
-    let currElem = new Element(elements[0].time, elements[0].type, elements[0].shape,
-        elements[0].rotation, elements[0].mirrored);
+    let currElem;
+    let index = 0;
     let grid = new GridClass();
 
     const getCurrElem = () => {
@@ -16,11 +16,28 @@ export const gameController = (() => {
         return grid;
     }
 
-    const startGame = () => {
-        displayController.createHtmlGrid();
-        displayController.setCurrElementHtml();
+    const randomizeArray = (array) => {
+        for (let i = 0; i < array.length - 1; ++i) {
+            let rand = Math.floor(Math.random() * array.length);
+            let tempElem = array[i];
+            array[i] = array[rand];
+            array[rand] = tempElem;
+        }
     }
 
-    return { getCurrElem, getGrid, startGame }
+    const updateCurrElementToNext = () => {
+        currElem = new Element(elements[index].time, elements[index].type, elements[index].shape,
+            elements[index].rotation, elements[index].mirrored);
+        ++index;
+    }
+
+    const startGame = () => {
+        randomizeArray(elements);
+        updateCurrElementToNext();
+        displayController.updateHtmlGrid();
+        displayController.updateCurrElementHtml();
+    }
+
+    return { getCurrElem, getGrid, updateCurrElementToNext, startGame }
 })();
 

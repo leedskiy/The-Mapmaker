@@ -1,7 +1,7 @@
 import { gameController } from "./gameController.js";
 
 export const displayController = (() => {
-    const createHtmlGrid = () => {
+    const updateHtmlGrid = () => {
         const gridContainer = document.querySelector('.grid__container');
         const grid = gameController.getGrid();
         gridContainer.innerHTML = ``;
@@ -20,7 +20,7 @@ export const displayController = (() => {
         }
     }
 
-    const setCurrElementHtml = () => {
+    const updateCurrElementHtml = () => {
         const currElem = gameController.getCurrElem();
         const currElemHtml = currElem.getCellsHtml();
         const s3gridContainer = document.querySelector('.s3grid__container');
@@ -31,5 +31,5 @@ export const displayController = (() => {
         }
     }
 
-    return { createHtmlGrid, setCurrElementHtml }
+    return { updateHtmlGrid, updateCurrElementHtml }
 })();
