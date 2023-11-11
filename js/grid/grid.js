@@ -1,4 +1,5 @@
 import { Cell } from "./cell.js";
+import { mountains } from "../data/mountains.js";
 
 export class GridClass {
     #grid;
@@ -18,6 +19,10 @@ export class GridClass {
             }
 
             this.#grid.push(row);
+        }
+
+        for (let i = 0; i < mountains.length; i++) {
+            this.#grid[mountains[i][0] - 1][mountains[i][1] - 1].setType("mountain");
         }
     }
 
