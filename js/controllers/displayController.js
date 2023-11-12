@@ -40,6 +40,11 @@ export const displayController = (() => {
             currElem.rotate();
             updateCurrElementHtml();
         });
+
+        flipButton.addEventListener('click', () => {
+            currElem.flip();
+            updateCurrElementHtml();
+        });
     }
 
     return { updateHtmlGrid, updateCurrElementHtml, addEventListeners }

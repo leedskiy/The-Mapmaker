@@ -51,6 +51,14 @@ export class Element {
         this.#rotation === 3 ? this.#rotation = 0 : this.#rotation += 1;
     }
 
+    flip = () => {
+        for (let i = 0; i < this.#shape.length; i++) {
+            this.#shape[i].reverse();
+        }
+
+        this.#mirrored = !this.#mirrored;
+    }
+
     getCellsHtml = () => {
         const cellsHtml = [];
 
