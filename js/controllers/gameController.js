@@ -36,6 +36,7 @@ export const gameController = (() => {
         updateCurrElementToNext();
         displayController.updateHtmlGrid();
         displayController.updateCurrElementHtml();
+        displayController.addEventListeners();
     }
 
     return { getCurrElem, getGrid, updateCurrElementToNext, startGame }

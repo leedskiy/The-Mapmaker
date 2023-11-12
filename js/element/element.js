@@ -33,6 +33,24 @@ export class Element {
         return this.#mirrored;
     }
 
+    rotate = () => {
+        let rotatedShape = [];
+
+        for (let i = 0; i < this.#shape.length; i++) {
+            let row = [0, 0, 0];
+            rotatedShape.push(row);
+        }
+
+        for (let i = 0; i < this.#shape.length; i++) {
+            for (let j = 0; j < this.#shape[i].length; j++) {
+                rotatedShape[i][j] = this.#shape[this.#shape[i].length - 1 - j][i];
+            }
+        }
+
+        this.#shape = rotatedShape;
+        this.#rotation === 3 ? this.#rotation = 0 : this.#rotation += 1;
+    }
+
     getCellsHtml = () => {
         const cellsHtml = [];
 

@@ -31,5 +31,16 @@ export const displayController = (() => {
         }
     }
 
-    return { updateHtmlGrid, updateCurrElementHtml }
+    const addEventListeners = () => {
+        const rotateButton = document.querySelector('.section3__button1');
+        const flipButton = document.querySelector('.section3__button2');
+        const currElem = gameController.getCurrElem();
+
+        rotateButton.addEventListener('click', () => {
+            currElem.rotate();
+            updateCurrElementHtml();
+        });
+    }
+
+    return { updateHtmlGrid, updateCurrElementHtml, addEventListeners }
 })();
