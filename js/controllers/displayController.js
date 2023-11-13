@@ -62,7 +62,7 @@ export const displayController = (() => {
         }
     }
 
-    function hideElementFromGrid(target) {
+    const hideElementFromGrid = (target) => {
         const row = parseInt(target.getAttribute('data-row'));
         const col = parseInt(target.getAttribute('data-col')) - 1;
         const currElem = gameController.getCurrElem();
@@ -78,6 +78,30 @@ export const displayController = (() => {
                 }
             }
         }
+    }
+
+    const updateTimeHtml = () => {
+        const currElem = gameController.getCurrElem();
+        const elemTimeValueHtml = document.querySelector('.time__value');
+        const timeinfoTimeHtml = document.querySelector('.timeinfo__time');
+        const seasoninfoSeasonHtml = document.querySelector('.seasoninfo__season');
+        const timeAndSeason = gameController.getTimeAndSeason();
+
+        elemTimeValueHtml.innerHTML = `${currElem.getTime()}`;
+        timeinfoTimeHtml.innerHTML = timeAndSeason.getCurrTime();
+
+        seasoninfoSeasonHtml.innerHTML =
+            timeAndSeason.getCurrSeason() === 1 ? "Spring (A, B)" :
+                timeAndSeason.getCurrSeason() === 2 ? "Summer (B, C)" :
+                    timeAndSeason.getCurrSeason() === 3 ? "Autumn (C D)" :
+                        timeAndSeason.getCurrSeason() === 4 ? "Winter (D, A)" :
+                            "End";
+    }
+
+    const updateHtml = () => {
+        updateHtmlGrid();
+        updateCurrElementHtml();
+        updateTimeHtml();
     }
 
     const addEventListeners = () => {
@@ -109,12 +133,12 @@ export const displayController = (() => {
 
         gridContainer.addEventListener('click', (e) => {
             if (grid.addElementToGrid(e.target)) {
+                gameController.updateCurrTime();
                 gameController.updateCurrElementToNext();
-                updateCurrElementHtml();
-                updateHtmlGrid();
+                updateHtml();
             }
         });
     }
 
-    return { updateHtmlGrid, updateCurrElementHtml, addEventListeners }
+    return { addEventListeners, updateHtml }
 })();

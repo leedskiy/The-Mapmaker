@@ -190,7 +190,17 @@ body {
     }
 }
 
-/*------------------------background------------------------*/
+/*------------------------cover and background------------------------*/
+
+.cover {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: -76;
+    display: block;
+}
 
 .background {
     width: 100%;

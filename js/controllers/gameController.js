@@ -2,11 +2,13 @@ import { GridClass } from "../grid/grid.js";
 import { Element } from "../element/element.js";
 import { elements } from "../data/elements.js";
 import { displayController } from "./displayController.js";
+import { TimeManager } from "../time and points/timeManager.js";
 
 export const gameController = (() => {
     let currElem;
     let index = 0;
     let grid = new GridClass();
+    let timeAndSeason = new TimeManager();
 
     const getCurrElem = () => {
         return currElem;
@@ -14,6 +16,10 @@ export const gameController = (() => {
 
     const getGrid = () => {
         return grid;
+    }
+
+    const getTimeAndSeason = () => {
+        return timeAndSeason;
     }
 
     const randomizeArray = (array) => {
@@ -37,14 +43,18 @@ export const gameController = (() => {
         ++index;
     }
 
+    const updateCurrTime = () => {
+        console.log(currElem.getTime());
+        timeAndSeason.adjustCurrTime(currElem.getTime());
+    }
+
     const startGame = () => {
         randomizeArray(elements);
         updateCurrElementToNext();
-        displayController.updateHtmlGrid();
-        displayController.updateCurrElementHtml();
+        displayController.updateHtml();
         displayController.addEventListeners();
     }
 
-    return { getCurrElem, getGrid, updateCurrElementToNext, startGame }
+    return { getCurrElem, getGrid, getTimeAndSeason, updateCurrElementToNext, updateCurrTime, startGame }
 })();
 
