@@ -45,8 +45,28 @@ export class Mission {
         this._seasonalLetter = newSeasonalLetter;
     }
 
+    getTitle = () => {
+        return this._title;
+    }
+
+    getTitle = () => {
+        return this._title;
+    }
+
+    getDescription = () => {
+        return this._description;
+    }
+
     getCurrPoints = () => {
         return this._currPoints;
+    }
+
+    getMissionCost = () => {
+        return this._missionCost;
+    }
+
+    getSeasonalLetter = () => {
+        return this._seasonalLetter;
     }
 
     checkMissionFulfillment = () => { }

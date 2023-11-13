@@ -111,6 +111,48 @@ export const displayController = (() => {
         counterPoints.innerHTML = `${pointsManager.getPointsTotal()}`;
     }
 
+    const initializeMissionsHtml = () => {
+        const section2MissionsHtml = document.querySelector('.section2__missions');
+        const missionsManager = gameController.getMissionsManager();
+        const activeMissions = missionsManager.getActiveMissions();
+        section2MissionsHtml.innerHTML = ``;
+
+        for (let i = 0; i < activeMissions.length; i++) {
+            let newElem = document.createElement('div');
+            newElem.classList.add('missions__mission');
+            newElem.classList.add(`missions__mission${i + 1}`);
+            let imgName = activeMissions[i].getTitle().toLowerCase().split(' ').join('_');
+            newElem.innerHTML = `
+                <div class="mission__mleft">
+                    <img src="img/missions_pics/${imgName}_mission.png"
+                        class="mission__pic mission1__pic" alt="mission1_pic">
+                </div>
+
+                <div class="mission__mright">
+                    <div class="mright__top">
+                        <h4 class="mright__title mission1__title">${activeMissions[i].getTitle()}</h4>
+                        <p class="mright__description mission1__description">
+                            ${activeMissions[i].getDescription()}
+                        </p>
+                    </div>
+
+                    <div class="mright__mrbottom">
+                        <div class="mrbottom__left">
+                            <p class="mrbottom__points mission1__points">(${activeMissions[i].getMissionCost() +
+                (activeMissions[i].getMissionCost() === 1 ? " point" : " points")})</p>
+                        </div>
+
+                        <div class="mrbottom__right">
+                            <div class="mrbottom__status mission1__status"></div>
+                            <h4 class="mrbottom__letter mission1__letter">${activeMissions[i].getSeasonalLetter()}</h4>
+                        </div>
+                    </div>
+                </div>
+            `
+            section2MissionsHtml.append(newElem);
+        }
+    }
+
     const updateHtml = () => {
         updateHtmlGrid();
         updateCurrElementHtml();
@@ -155,5 +197,5 @@ export const displayController = (() => {
         });
     }
 
-    return { addEventListeners, updateHtml }
+    return { addEventListeners, initializeMissionsHtml, updateHtml }
 })();

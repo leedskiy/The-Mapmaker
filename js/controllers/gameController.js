@@ -80,6 +80,7 @@ export const gameController = (() => {
         updateCurrElementToNext();
         missionsManager.updateActiveMissions();
         updateCurrPoints();
+        displayController.initializeMissionsHtml();
         displayController.updateHtml();
         displayController.addEventListeners();
     }

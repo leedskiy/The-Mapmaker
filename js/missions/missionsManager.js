@@ -33,7 +33,7 @@ export class MissionsManager {
             missions["basic"][2].description, 2, 'A'));
     }
 
-    getMissionList = () => {
+    getFullMissionList = () => {
         return this.#fullMissionsList;
     }
 
@@ -51,7 +51,7 @@ export class MissionsManager {
         this.#activeMissions[3].seasonalLetter = 'D';
     }
 
-    getActiveMissionsArray = () => {
+    getActiveMissions = () => {
         return this.#activeMissions;
     }
 
