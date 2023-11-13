@@ -15,6 +15,8 @@ export const displayController = (() => {
                 newElem.setAttribute('alt', `base_tile.png`);
                 newElem.setAttribute('data-row', `${grid.getGrid()[i][j].getRow()}`);
                 newElem.setAttribute('data-col', `${grid.getGrid()[i][j].getCol()}`);
+                newElem.setAttribute('id', `gridElem${grid.getGrid()[i][j].getRow()}`
+                    + `${grid.getGrid()[i][j].getCol()}`);
                 gridContainer.append(newElem);
             }
         }
@@ -31,10 +33,56 @@ export const displayController = (() => {
         }
     }
 
+    const showElementOnGrid = (event) => {
+        const target = event.target;
+        const row = parseInt(target.getAttribute('data-row'));
+        const col = parseInt(target.getAttribute('data-col')) - 1;
+        const currElem = gameController.getCurrElem();
+        const currElemShape = currElem.getShape();
+        const grid = gameController.getGrid();
+
+        for (let i = 0; i < currElemShape.length; i++) {
+            for (let j = 0; j < currElemShape[i].length; j++) {
+                let htmlGridElem = document.getElementById(`gridElem${row + i}${col + j}`);
+                if (htmlGridElem) {
+                    if (currElemShape[i][j]) {
+                        if (grid.getGrid()[row + i][col + j].getType() === "base") {
+                            htmlGridElem.src = `img/tiles/${currElem.getType()}_tile.png`;
+                            htmlGridElem.style.opacity = 0.5;
+                        }
+                        else {
+                            htmlGridElem.src = `img/tiles/error_tile.png`;
+                            htmlGridElem.style.opacity = 0.8;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    const hideElementFromGrid = (target) => {
+        const row = parseInt(target.getAttribute('data-row'));
+        const col = parseInt(target.getAttribute('data-col')) - 1;
+        const currElem = gameController.getCurrElem();
+        const currElemShape = currElem.getShape();
+        const grid = gameController.getGrid();
+
+        for (let i = 0; i < currElemShape.length; i++) {
+            for (let j = 0; j < currElemShape[i].length; j++) {
+                let htmlGridElem = document.getElementById(`gridElem${row + i}${col + j}`);
+                if (htmlGridElem) {
+                    htmlGridElem.src = `img/tiles/${grid.getGrid()[row + i][col + j].getType()}_tile.png`;
+                    htmlGridElem.style.opacity = 1;
+                }
+            }
+        }
+    }
+
     const addEventListeners = () => {
         const rotateButton = document.querySelector('.section3__button1');
         const flipButton = document.querySelector('.section3__button2');
         const currElem = gameController.getCurrElem();
+        const gridContainer = document.querySelector('.grid__container');
 
         rotateButton.addEventListener('click', () => {
             currElem.rotate();
@@ -44,6 +92,14 @@ export const displayController = (() => {
         flipButton.addEventListener('click', () => {
             currElem.flip();
             updateCurrElementHtml();
+        });
+
+        gridContainer.addEventListener('mousemove', (e) => {
+            showElementOnGrid(e);
+        });
+
+        gridContainer.addEventListener('mouseout', (e) => {
+            hideElementFromGrid(e.target);
         });
     }
 
