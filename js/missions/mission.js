@@ -49,5 +49,5 @@ export class Mission {
         return this._currPoints;
     }
 
-    checkMissionFulfillment() { }
+    checkMissionFulfillment = () => { }
 }

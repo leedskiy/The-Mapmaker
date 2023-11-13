@@ -7,11 +7,11 @@ export class TimeManager {
         this.#currSeason = 1;
     }
 
-    getCurrTime() {
+    getCurrTime = () => {
         return this.#currTime;
     }
 
-    adjustCurrTime(time) {
+    adjustCurrTime = (time) => {
         if (this.#currTime + time >= 7) {
             if (this.#currSeason + 1 <= 4) {
                 this.#currSeason += 1;
@@ -24,7 +24,7 @@ export class TimeManager {
         }
     }
 
-    getCurrSeason() {
+    getCurrSeason = () => {
         return this.#currSeason;
     }
 }

@@ -6,7 +6,7 @@ export class BorderlandsMission extends Mission {
         super(title, description, missionCost, seasonalLetter);
     }
 
-    checkMissionFulfillment() {
+    checkMissionFulfillment = () => {
         this.currPoints = 0;
         const grid = gameController.getGrid();
 

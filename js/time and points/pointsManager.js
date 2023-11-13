@@ -9,21 +9,21 @@ export class PointsManager {
         this.#pointsTotal = 0;
     }
 
-    adjustCurrSeasonPoints(points) {
+    adjustCurrSeasonPoints = (points) => {
         const timeAndSeason = gameController.getTimeAndSeason();
         this.#seasonalPoints[timeAndSeason.getCurrSeason() - 1] += points;
     }
 
-    getCurrSeasonPoints() {
+    getCurrSeasonPoints = () => {
         const timeAndSeason = gameController.getTimeAndSeason();
         return this.#seasonalPoints[timeAndSeason.getCurrSeason() - 1];
     }
 
-    calculatePointsTotal() {
+    calculatePointsTotal = () => {
         this.#seasonalPoints.map((e) => this.#pointsTotal += e);
     }
 
-    getPointsTotal() {
+    getPointsTotal = () => {
         return this.#pointsTotal;
     }
 }
