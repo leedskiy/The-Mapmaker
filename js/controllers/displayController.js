@@ -11,6 +11,8 @@ export const displayController = (() => {
                 let newElem = document.createElement('img');
                 newElem.classList.add('grid__elem');
                 newElem.classList.add('gelem');
+                newElem.classList.add(`row-${grid.getGrid()[i][j].getRow()}`);
+                newElem.classList.add(`col-${grid.getGrid()[i][j].getCol()}`);
                 newElem.setAttribute('src', `img/tiles/${grid.getGrid()[i][j].getType()}_tile.png`);
                 newElem.setAttribute('alt', `base_tile.png`);
                 newElem.setAttribute('data-row', `${grid.getGrid()[i][j].getRow()}`);
@@ -35,14 +37,15 @@ export const displayController = (() => {
 
     const showElementOnGrid = (target) => {
         const row = parseInt(target.getAttribute('data-row'));
-        const col = parseInt(target.getAttribute('data-col')) - 1;
+        const col = parseInt(target.getAttribute('data-col') - 1);
         const currElem = gameController.getCurrElem();
         const currElemShape = currElem.getShape();
         const grid = gameController.getGrid();
 
+
         for (let i = 0; i < currElemShape.length; i++) {
             for (let j = 0; j < currElemShape[i].length; j++) {
-                let htmlGridElem = document.getElementById(`gridElem${row + i}${col + j}`);
+                let htmlGridElem = document.querySelector(`.row-${row + i}.col-${col + j}`);
                 if (htmlGridElem) {
                     if (currElemShape[i][j]) {
                         if (grid.getGrid()[row + i][col + j].getType() === "base") {
@@ -59,7 +62,7 @@ export const displayController = (() => {
         }
     }
 
-    const hideElementFromGrid = (target) => {
+    function hideElementFromGrid(target) {
         const row = parseInt(target.getAttribute('data-row'));
         const col = parseInt(target.getAttribute('data-col')) - 1;
         const currElem = gameController.getCurrElem();
@@ -68,7 +71,7 @@ export const displayController = (() => {
 
         for (let i = 0; i < currElemShape.length; i++) {
             for (let j = 0; j < currElemShape[i].length; j++) {
-                let htmlGridElem = document.getElementById(`gridElem${row + i}${col + j}`);
+                let htmlGridElem = document.querySelector(`.row-${row + i}.col-${col + j}`);
                 if (htmlGridElem) {
                     htmlGridElem.src = `img/tiles/${grid.getGrid()[row + i][col + j].getType()}_tile.png`;
                     htmlGridElem.style.opacity = 1;
@@ -80,16 +83,18 @@ export const displayController = (() => {
     const addEventListeners = () => {
         const rotateButton = document.querySelector('.section3__button1');
         const flipButton = document.querySelector('.section3__button2');
-        const currElem = gameController.getCurrElem();
+        let currElem = gameController.getCurrElem();
         const gridContainer = document.querySelector('.grid__container');
         const grid = gameController.getGrid();
 
         rotateButton.addEventListener('click', () => {
+            currElem = gameController.getCurrElem();
             currElem.rotate();
             updateCurrElementHtml();
         });
 
         flipButton.addEventListener('click', () => {
+            currElem = gameController.getCurrElem();
             currElem.flip();
             updateCurrElementHtml();
         });

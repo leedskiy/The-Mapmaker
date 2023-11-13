@@ -32,26 +32,31 @@ export class GridClass {
     }
 
     addElementToGrid = (target) => {
-        const row = parseInt(target.getAttribute('data-row'));
-        const col = parseInt(target.getAttribute('data-col')) - 1;
-        const currElem = gameController.getCurrElem();
-        const currElemShape = currElem.getShape();
+        if (target.classList.contains('grid__elem')) {
+            const row = parseInt(target.getAttribute('data-row'));
+            const col = parseInt(target.getAttribute('data-col')) - 1;
+            const currElem = gameController.getCurrElem();
+            const currElemShape = currElem.getShape();
 
-        if (this.checkElemCanBePlaced(row, col)) {
-            for (let i = 0; i < currElemShape.length; i++) {
-                for (let j = 0; j < currElemShape[i].length; j++) {
-                    if (this.#grid[row + i][col + j]) {
-                        if (currElemShape[i][j]) {
-                            this.#grid[row + i][col + j].setType(currElem.getType());
+            if (this.checkElemCanBePlaced(row, col)) {
+                for (let i = 0; i < currElemShape.length; i++) {
+                    for (let j = 0; j < currElemShape[i].length; j++) {
+                        if (!(row + i > 10 || col + j > 10 || col + j < 0)) {
+                            let gridCell = this.#grid[row + i][col + j];
+
+                            if (gridCell) {
+                                if (currElemShape[i][j]) {
+                                    gridCell.setType(currElem.getType());
+                                }
+                            }
                         }
                     }
                 }
+                return true;
             }
-            return true;
         }
-        else {
-            return false;
-        }
+
+        return false;
     }
 
     checkElemCanBePlaced = (row, col) => {
@@ -60,9 +65,17 @@ export class GridClass {
 
         for (let i = 0; i < currElemShape.length; i++) {
             for (let j = 0; j < currElemShape[i].length; j++) {
-                if (this.#grid[row + i][col + j]) {
-                    if (currElemShape[i][j] && this.#grid[row + i][col + j].getType() !== "base") {
-                        return false;
+                if (currElemShape[i][j] && (row + i > 10 || col + j > 10 || col + j < 0)) {
+                    return false;
+                }
+
+                if (!(row + i > 10 || col + j > 10 || col + j < 0)) {
+                    let gridCell = this.#grid[row + i][col + j];
+
+                    if (gridCell) {
+                        if (currElemShape[i][j] && gridCell.getType() !== "base") {
+                            return false;
+                        }
                     }
                 }
             }

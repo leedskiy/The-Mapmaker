@@ -27,7 +27,6 @@ export const gameController = (() => {
 
     const updateCurrElementToNext = () => {
         if (index === 16) {
-            console.log(16);
             index = 0;
             randomizeArray(elements);
         }
