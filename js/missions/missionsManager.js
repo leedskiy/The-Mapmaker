@@ -60,7 +60,6 @@ export class MissionsManager {
 
     calcSurrMountMissionPts = () => {
         this.#surrMountainDefMission.checkMissionFulfillment();
-        console.log(this.#surrMountainDefMission.getCurrPoints());
         this.#surrMountainMissionPoints = this.#surrMountainDefMission.getCurrPoints();
     }
 

@@ -22,7 +22,6 @@ export class SurroundedMountainDefaultMission extends Mission {
                         gridArray[i + 1][j].getType() !== "base" &&
                         gridArray[i][j - 1].getType() !== "base"
                     ) {
-                        console.log("555");
                         this.currPoints += this.missionCost;
                     }
                 }

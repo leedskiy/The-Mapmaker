@@ -9,17 +9,18 @@ export class BorderlandsMission extends Mission {
     checkMissionFulfillment = () => {
         this.currPoints = 0;
         const grid = gameController.getGrid();
+        const gridArray = grid.getGrid();
 
-        for (let i = 0; i < grid.getGrid().length; i++) {
-            let isFullRow = grid.getGrid()[i].every((e) => e.getType() !== "base");
+        for (let i = 0; i < gridArray.length; i++) {
+            let isFullRow = gridArray[i].every((e) => e.getType() !== "base");
 
             if (isFullRow) {
                 this.currPoints += this.missionCost;
             }
         }
 
-        for (let i = 0; i < grid.getGrid()[0].length; i++) {
-            let isFullCol = grid.getGrid().every((e) => e[i].getType() !== "base");
+        for (let i = 0; i < gridArray[0].length; i++) {
+            let isFullCol = gridArray.every((e) => e[i].getType() !== "base");
 
             if (isFullCol) {
                 this.currPoints += this.missionCost;
