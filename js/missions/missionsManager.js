@@ -4,6 +4,7 @@ import { SurroundedMountainDefaultMission } from "./surroundedMountainDefaultMis
 
 import { BorderlandsMission } from "./borderlandsMission.js";
 import { EdgeOfTheForestMission } from "./edgeOfTheForestMission.js";
+import { SleepyValleyMission } from "./sleepyValleyMission.js";
 
 export class MissionsManager {
     #activeMissionsTotalPoints;
@@ -11,8 +12,7 @@ export class MissionsManager {
     #surrMountainMissionPoints;
     #surrMountainDefMission;
 
-    #borderlandsMission;
-    #edgeOfTheForestMission;
+    #fullMissionsList;
 
     constructor() {
         this.#activeMissionsTotalPoints = 0;
@@ -21,29 +21,28 @@ export class MissionsManager {
         this.#surrMountainDefMission = new SurroundedMountainDefaultMission("Surrounded mountain",
             "If you surround the mountains on 4 sides, you get 1 point per surrounded mountain", 1, "no season");
 
-        this.#borderlandsMission = new BorderlandsMission(missions["basic"][3].title,
-            missions["basic"][3].description, 6, 'A');
-        this.#edgeOfTheForestMission = new EdgeOfTheForestMission(missions["basic"][0].title,
-            missions["basic"][0].description, 1, 'A');
+        this.#fullMissionsList = [];
+        this.#fullMissionsList.push(new BorderlandsMission(missions["basic"][3].title,
+            missions["basic"][3].description, 6, 'A'));
+        this.#fullMissionsList.push(new EdgeOfTheForestMission(missions["basic"][0].title,
+            missions["basic"][0].description, 1, 'A'));
+        this.#fullMissionsList.push(new SleepyValleyMission(missions["basic"][1].title,
+            missions["basic"][1].description, 4, 'A'));
     }
 
     getMissionList = () => {
-        return [
-            this.#borderlandsMission,
-            this.#edgeOfTheForestMission
-        ]
+        return this.#fullMissionsList;
     }
 
     updateActiveMissions = () => {
-        let allMissions = this.getMissionList();
-        gameController.randomizeArray(allMissions);
-        this.#activeMissions.push(allMissions[0]);
-        this.#activeMissions.push(allMissions[1]);
-        // this.#activeMissions.push(allMissions[2]);
-        // this.#activeMissions.push(allMissions[3]);
+        gameController.randomizeArray(this.#fullMissionsList);
+        this.#activeMissions.push(this.#fullMissionsList[0]);
+        this.#activeMissions.push(this.#fullMissionsList[1]);
+        this.#activeMissions.push(this.#fullMissionsList[2]);
+        // this.#activeMissions.push(this.#fullMissionsList[3]);
         this.#activeMissions[0].seasonalLetter = 'A';
         this.#activeMissions[1].seasonalLetter = 'B';
-        // this.#activeMissions[2].seasonalLetter = 'C';
+        this.#activeMissions[2].seasonalLetter = 'C';
         // this.#activeMissions[3].seasonalLetter = 'D';
     }
 
