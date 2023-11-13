@@ -5,6 +5,7 @@ import { SurroundedMountainDefaultMission } from "./surroundedMountainDefaultMis
 import { BorderlandsMission } from "./borderlandsMission.js";
 import { EdgeOfTheForestMission } from "./edgeOfTheForestMission.js";
 import { SleepyValleyMission } from "./sleepyValleyMission.js";
+import { WateringPotatoes } from "./wateringPotatoes.js";
 
 export class MissionsManager {
     #activeMissionsTotalPoints;
@@ -28,6 +29,8 @@ export class MissionsManager {
             missions["basic"][0].description, 1, 'A'));
         this.#fullMissionsList.push(new SleepyValleyMission(missions["basic"][1].title,
             missions["basic"][1].description, 4, 'A'));
+        this.#fullMissionsList.push(new WateringPotatoes(missions["basic"][2].title,
+            missions["basic"][2].description, 2, 'A'));
     }
 
     getMissionList = () => {
@@ -36,14 +39,16 @@ export class MissionsManager {
 
     updateActiveMissions = () => {
         gameController.randomizeArray(this.#fullMissionsList);
+
         this.#activeMissions.push(this.#fullMissionsList[0]);
         this.#activeMissions.push(this.#fullMissionsList[1]);
         this.#activeMissions.push(this.#fullMissionsList[2]);
-        // this.#activeMissions.push(this.#fullMissionsList[3]);
+        this.#activeMissions.push(this.#fullMissionsList[3]);
+
         this.#activeMissions[0].seasonalLetter = 'A';
         this.#activeMissions[1].seasonalLetter = 'B';
         this.#activeMissions[2].seasonalLetter = 'C';
-        // this.#activeMissions[3].seasonalLetter = 'D';
+        this.#activeMissions[3].seasonalLetter = 'D';
     }
 
     getActiveMissionsArray = () => {
