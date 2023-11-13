@@ -59,13 +59,19 @@ export const gameController = (() => {
         timeAndSeason.adjustCurrTime(currElem.getTime());
     }
 
-    const calculateMissionsPoints = () => {
-        missionsManager.calculatePointsFromActiveMissions();
-        return missionsManager.getTotalPointsFromMissions();
+    const calcActMissionsPoints = () => {
+        missionsManager.calcPtsFromActMissions();
+        return missionsManager.getTtlPtsFromActMissions();
+    }
+
+    const calcSurrMountMissionPoints = () => {
+        missionsManager.calcSurrMountMissionPts();
+        return missionsManager.getSurrMountainMissionPoints();
     }
 
     const updateCurrPoints = () => {
-        pointsManager.setCurrSeasonPoints(calculateMissionsPoints());
+        const points = calcActMissionsPoints() + calcSurrMountMissionPoints();
+        pointsManager.setCurrSeasonPoints(points);
         pointsManager.calculatePointsTotal();
     }
 
