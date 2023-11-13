@@ -3,12 +3,16 @@ import { Element } from "../element/element.js";
 import { elements } from "../data/elements.js";
 import { displayController } from "./displayController.js";
 import { TimeManager } from "../time and points/timeManager.js";
+// import { PointsManager } from "../time and points/pointsManager.js";
+
 
 export const gameController = (() => {
     let currElem;
     let index = 0;
-    let grid = new GridClass();
-    let timeAndSeason = new TimeManager();
+    const grid = new GridClass();
+    const timeAndSeason = new TimeManager();
+    // const points = new PointsManager();
+
 
     const getCurrElem = () => {
         return currElem;
@@ -44,9 +48,12 @@ export const gameController = (() => {
     }
 
     const updateCurrTime = () => {
-        console.log(currElem.getTime());
         timeAndSeason.adjustCurrTime(currElem.getTime());
     }
+
+    // const updateCurrPoints = () => {
+    //     points.addCurrSeasonPoints()
+    // }
 
     const startGame = () => {
         randomizeArray(elements);
@@ -55,6 +62,9 @@ export const gameController = (() => {
         displayController.addEventListeners();
     }
 
-    return { getCurrElem, getGrid, getTimeAndSeason, updateCurrElementToNext, updateCurrTime, startGame }
+    return {
+        getCurrElem, getGrid, getTimeAndSeason,
+        randomizeArray, updateCurrElementToNext, updateCurrTime,
+        startGame
+    }
 })();
-
