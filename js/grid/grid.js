@@ -1,5 +1,6 @@
 import { GridCell } from "./gridCell.js";
 import { mountains } from "../data/mountains.js";
+import { gameController } from "../controllers/gameController.js";
 
 export class GridClass {
     #grid;
@@ -28,5 +29,45 @@ export class GridClass {
 
     getGrid = () => {
         return this.#grid;
+    }
+
+    addElementToGrid = (target) => {
+        const row = parseInt(target.getAttribute('data-row'));
+        const col = parseInt(target.getAttribute('data-col')) - 1;
+        const currElem = gameController.getCurrElem();
+        const currElemShape = currElem.getShape();
+
+        if (this.checkElemCanBePlaced(row, col)) {
+            for (let i = 0; i < currElemShape.length; i++) {
+                for (let j = 0; j < currElemShape[i].length; j++) {
+                    if (this.#grid[row + i][col + j]) {
+                        if (currElemShape[i][j]) {
+                            this.#grid[row + i][col + j].setType(currElem.getType());
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    checkElemCanBePlaced = (row, col) => {
+        const currElem = gameController.getCurrElem();
+        const currElemShape = currElem.getShape();
+
+        for (let i = 0; i < currElemShape.length; i++) {
+            for (let j = 0; j < currElemShape[i].length; j++) {
+                if (this.#grid[row + i][col + j]) {
+                    if (currElemShape[i][j] && this.#grid[row + i][col + j].getType() !== "base") {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

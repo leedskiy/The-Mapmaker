@@ -33,8 +33,7 @@ export const displayController = (() => {
         }
     }
 
-    const showElementOnGrid = (event) => {
-        const target = event.target;
+    const showElementOnGrid = (target) => {
         const row = parseInt(target.getAttribute('data-row'));
         const col = parseInt(target.getAttribute('data-col')) - 1;
         const currElem = gameController.getCurrElem();
@@ -83,6 +82,7 @@ export const displayController = (() => {
         const flipButton = document.querySelector('.section3__button2');
         const currElem = gameController.getCurrElem();
         const gridContainer = document.querySelector('.grid__container');
+        const grid = gameController.getGrid();
 
         rotateButton.addEventListener('click', () => {
             currElem.rotate();
@@ -95,11 +95,19 @@ export const displayController = (() => {
         });
 
         gridContainer.addEventListener('mousemove', (e) => {
-            showElementOnGrid(e);
+            showElementOnGrid(e.target);
         });
 
         gridContainer.addEventListener('mouseout', (e) => {
             hideElementFromGrid(e.target);
+        });
+
+        gridContainer.addEventListener('click', (e) => {
+            if (grid.addElementToGrid(e.target)) {
+                gameController.updateCurrElementToNext();
+                updateCurrElementHtml();
+                updateHtmlGrid();
+            }
         });
     }
 

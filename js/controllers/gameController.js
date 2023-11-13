@@ -26,8 +26,15 @@ export const gameController = (() => {
     }
 
     const updateCurrElementToNext = () => {
+        if (index === 16) {
+            console.log(16);
+            index = 0;
+            randomizeArray(elements);
+        }
+
         currElem = new Element(elements[index].time, elements[index].type, elements[index].shape,
             elements[index].rotation, elements[index].mirrored);
+
         ++index;
     }
 
