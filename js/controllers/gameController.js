@@ -4,8 +4,7 @@ import { elements } from "../data/elements.js";
 import { displayController } from "./displayController.js";
 import { TimeManager } from "../time and points/timeManager.js";
 import { MissionsManager } from "../missions/missionsManager.js";
-// import { PointsManager } from "../time and points/pointsManager.js";
-
+import { PointsManager } from "../time and points/pointsManager.js";
 
 export const gameController = (() => {
     let currElem;
@@ -13,7 +12,7 @@ export const gameController = (() => {
     const grid = new GridClass();
     const timeAndSeason = new TimeManager();
     const missionsManager = new MissionsManager();
-    // const points = new PointsManager();
+    const pointsManager = new PointsManager();
 
 
     const getCurrElem = () => {
@@ -55,25 +54,26 @@ export const gameController = (() => {
 
     const calculateMissionsPoints = () => {
         missionsManager.calculatePointsFromActiveMissions();
-        console.log(missionsManager.getTotalPointsFromMissions());
+        return missionsManager.getTotalPointsFromMissions();
     }
 
-    // const updateCurrPoints = () => {
-    //     points.addCurrSeasonPoints()
-    // }
+    const updateCurrPoints = () => {
+        pointsManager.adjustCurrSeasonPoints(calculateMissionsPoints());
+        pointsManager.calculatePointsTotal();
+    }
 
     const startGame = () => {
         randomizeArray(elements);
         updateCurrElementToNext();
         missionsManager.updateActiveMissions();
-        getMissionsPoints();
+        updateCurrPoints();
         displayController.updateHtml();
         displayController.addEventListeners();
     }
 
     return {
         getCurrElem, getGrid, getTimeAndSeason,
-        randomizeArray, updateCurrElementToNext, updateCurrTime,
+        randomizeArray, updateCurrElementToNext, updateCurrTime, updateCurrPoints,
         startGame
     }
 })();
