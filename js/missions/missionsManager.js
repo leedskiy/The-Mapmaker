@@ -1,7 +1,9 @@
 import { missions } from "../data/missions.js";
-import { BorderlandsMission } from "./borderlandsMission.js";
-import { SurroundedMountainDefaultMission } from "./surroundedMountainDefaultMission.js";
 import { gameController } from "../controllers/gameController.js";
+import { SurroundedMountainDefaultMission } from "./surroundedMountainDefaultMission.js";
+
+import { BorderlandsMission } from "./borderlandsMission.js";
+import { EdgeOfTheForestMission } from "./edgeOfTheForestMission.js";
 
 export class MissionsManager {
     #activeMissionsTotalPoints;
@@ -10,6 +12,7 @@ export class MissionsManager {
     #surrMountainDefMission;
 
     #borderlandsMission;
+    #edgeOfTheForestMission;
 
     constructor() {
         this.#activeMissionsTotalPoints = 0;
@@ -20,11 +23,14 @@ export class MissionsManager {
 
         this.#borderlandsMission = new BorderlandsMission(missions["basic"][3].title,
             missions["basic"][3].description, 6, 'A');
+        this.#edgeOfTheForestMission = new EdgeOfTheForestMission(missions["basic"][0].title,
+            missions["basic"][0].description, 1, 'A');
     }
 
     getMissionList = () => {
         return [
-            this.#borderlandsMission
+            this.#borderlandsMission,
+            this.#edgeOfTheForestMission
         ]
     }
 
@@ -32,11 +38,11 @@ export class MissionsManager {
         let allMissions = this.getMissionList();
         gameController.randomizeArray(allMissions);
         this.#activeMissions.push(allMissions[0]);
-        // this.#activeMissions.push(allMissions[1]);
+        this.#activeMissions.push(allMissions[1]);
         // this.#activeMissions.push(allMissions[2]);
         // this.#activeMissions.push(allMissions[3]);
         this.#activeMissions[0].seasonalLetter = 'A';
-        // this.#activeMissions[1].seasonalLetter = 'B';
+        this.#activeMissions[1].seasonalLetter = 'B';
         // this.#activeMissions[2].seasonalLetter = 'C';
         // this.#activeMissions[3].seasonalLetter = 'D';
     }
