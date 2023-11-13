@@ -93,15 +93,29 @@ export const displayController = (() => {
         seasoninfoSeasonHtml.innerHTML =
             timeAndSeason.getCurrSeason() === 1 ? "Spring (A, B)" :
                 timeAndSeason.getCurrSeason() === 2 ? "Summer (B, C)" :
-                    timeAndSeason.getCurrSeason() === 3 ? "Autumn (C D)" :
+                    timeAndSeason.getCurrSeason() === 3 ? "Autumn (C, D)" :
                         timeAndSeason.getCurrSeason() === 4 ? "Winter (D, A)" :
                             "End";
+    }
+
+    const updatePointsHtml = () => {
+        const cardsPoints = document.querySelectorAll('.card__points');
+        const counterPoints = document.querySelector('.counter__points');
+        const pointsManager = gameController.getPointsManager();
+        const seasonalPoints = pointsManager.getSeasonalPoints();
+
+        for (let i = 0; i < cardsPoints.length; i++) {
+            cardsPoints[i].innerHTML = `${seasonalPoints[i]}`
+        }
+
+        counterPoints.innerHTML = `${pointsManager.getPointsTotal()}`;
     }
 
     const updateHtml = () => {
         updateHtmlGrid();
         updateCurrElementHtml();
         updateTimeHtml();
+        updatePointsHtml();
     }
 
     const addEventListeners = () => {
@@ -133,9 +147,9 @@ export const displayController = (() => {
 
         gridContainer.addEventListener('click', (e) => {
             if (grid.addElementToGrid(e.target)) {
+                gameController.updateCurrPoints();
                 gameController.updateCurrTime();
                 gameController.updateCurrElementToNext();
-                gameController.updateCurrPoints();
                 updateHtml();
             }
         });

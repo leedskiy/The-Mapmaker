@@ -14,7 +14,6 @@ export const gameController = (() => {
     const missionsManager = new MissionsManager();
     const pointsManager = new PointsManager();
 
-
     const getCurrElem = () => {
         return currElem;
     }
@@ -25,6 +24,14 @@ export const gameController = (() => {
 
     const getTimeAndSeason = () => {
         return timeAndSeason;
+    }
+
+    const getMissionsManager = () => {
+        return missionsManager;
+    }
+
+    const getPointsManager = () => {
+        return pointsManager;
     }
 
     const randomizeArray = (array) => {
@@ -58,7 +65,7 @@ export const gameController = (() => {
     }
 
     const updateCurrPoints = () => {
-        pointsManager.adjustCurrSeasonPoints(calculateMissionsPoints());
+        pointsManager.setCurrSeasonPoints(calculateMissionsPoints());
         pointsManager.calculatePointsTotal();
     }
 
@@ -72,7 +79,7 @@ export const gameController = (() => {
     }
 
     return {
-        getCurrElem, getGrid, getTimeAndSeason,
+        getCurrElem, getGrid, getTimeAndSeason, getMissionsManager, getPointsManager,
         randomizeArray, updateCurrElementToNext, updateCurrTime, updateCurrPoints,
         startGame
     }
