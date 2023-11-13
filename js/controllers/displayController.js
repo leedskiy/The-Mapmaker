@@ -135,6 +135,7 @@ export const displayController = (() => {
             if (grid.addElementToGrid(e.target)) {
                 gameController.updateCurrTime();
                 gameController.updateCurrElementToNext();
+                gameController.getMissionsPoints();
                 updateHtml();
             }
         });

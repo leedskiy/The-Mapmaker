@@ -3,6 +3,7 @@ import { Element } from "../element/element.js";
 import { elements } from "../data/elements.js";
 import { displayController } from "./displayController.js";
 import { TimeManager } from "../time and points/timeManager.js";
+import { MissionsManager } from "../missions/missionsManager.js";
 // import { PointsManager } from "../time and points/pointsManager.js";
 
 
@@ -11,6 +12,7 @@ export const gameController = (() => {
     let index = 0;
     const grid = new GridClass();
     const timeAndSeason = new TimeManager();
+    const missionsManager = new MissionsManager();
     // const points = new PointsManager();
 
 
@@ -51,6 +53,11 @@ export const gameController = (() => {
         timeAndSeason.adjustCurrTime(currElem.getTime());
     }
 
+    const calculateMissionsPoints = () => {
+        missionsManager.calculatePointsFromActiveMissions();
+        console.log(missionsManager.getTotalPointsFromMissions());
+    }
+
     // const updateCurrPoints = () => {
     //     points.addCurrSeasonPoints()
     // }
@@ -58,6 +65,8 @@ export const gameController = (() => {
     const startGame = () => {
         randomizeArray(elements);
         updateCurrElementToNext();
+        missionsManager.updateActiveMissions();
+        getMissionsPoints();
         displayController.updateHtml();
         displayController.addEventListeners();
     }
