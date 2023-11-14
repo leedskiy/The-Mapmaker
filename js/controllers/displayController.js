@@ -245,6 +245,19 @@ export const displayController = (() => {
         endgamewindEgbutton1.addEventListener('click', (e) => {
             location.reload();
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.shiftKey && e.code === 'KeyR') {
+                currElem = gameController.getCurrElem();
+                currElem.rotate();
+                updateCurrElementHtml();
+            }
+            else if (e.shiftKey && e.code === 'KeyF') {
+                currElem = gameController.getCurrElem();
+                currElem.flip();
+                updateCurrElementHtml();
+            }
+        });
     }
 
     return { addEventListeners, initializeMissionsHtml, updateHtml }
