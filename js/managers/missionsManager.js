@@ -10,6 +10,7 @@ import { WateringPotatoesMission } from "../missions/wateringPotatoesMission.js"
 import { TreeLineMission } from "../missions/treeLineMission.js";
 import { WateringCanal } from "../missions/wateringCanalMission.js";
 import { WealthyTownMission } from "../missions/wealthyTownMission.js";
+import { MagiciansValleyMission } from "../missions/magiciansValleyMission.js";
 
 export class MissionsManager {
     #ssnlMissionsTotalPoints;
@@ -44,6 +45,8 @@ export class MissionsManager {
             missions["extra"][1].description, 4, 'A'));
         this.#fullMissionsList.push(new WealthyTownMission(missions["extra"][2].title,
             missions["extra"][2].description, 3, 'A'));
+        this.#fullMissionsList.push(new MagiciansValleyMission(missions["extra"][3].title,
+            missions["extra"][3].description, 3, 'A'));
     }
 
     getFullMissionList = () => {
@@ -56,7 +59,7 @@ export class MissionsManager {
         this.#activeMissions.push(this.#fullMissionsList[0]);
         // this.#activeMissions.push(this.#fullMissionsList[1]);
         // temporary for testing
-        let newMissionName = "Wealthy town";
+        let newMissionName = "Magicians' valley";
         this.#fullMissionsList.forEach(e => {
             if (e.getTitle() === newMissionName) {
                 this.#activeMissions.push(e);
