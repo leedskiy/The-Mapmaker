@@ -98,9 +98,24 @@ p {
     font-size: 0.8rem;
 }
 
+.button {
+    background-color: #ffffff;
+    transition: 0.5s;
+}
+
+.button:hover {
+    background-color: #e8e8e8;
+    transition: 0.5s;
+}
+
+.button:active {
+    transform: scale(0.97);
+    transition: 0.5s;
+}
+
 .buttext {
     color: #ffffff;
-    transition: color 0.6s;
+    transition: color 0.1s;
 }
 
 .link a {
@@ -727,5 +742,85 @@ body {
     .section3__button1, .section3__button2 {
         padding: 7px 20px;
         width: 100px;
+    }
+}
+
+/*------------------------endgamewind------------------------*/
+
+.endgamewind {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    width: 500px;
+    height: 300px;
+    border-radius: 15px;
+    z-index: 7;
+    display: none;
+}
+
+.endgamewind-active {
+    display: block;
+}
+
+.endgamewind__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.__container {
+}
+
+.endgamewind__egtextbox {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+}
+
+.endgamewind__egtext1 {
+    text-align: center;
+}
+
+.egtext1__nowrap2{
+    text-wrap: nowrap;
+}
+
+.endgamewind__egtext2 {
+}
+
+.egtext2__score {
+}
+
+.endgamewind__egbutton1 {
+    padding: 10px;
+    width: 140px;
+    border-radius: 10px;
+}
+
+.egbutton1__text {
+}
+
+@media(max-width: 600px){
+    .endgamewind {
+        width: 300px;
+    }
+}
+
+@media(max-width: 426px){
+    .endgamewind {
+        width: 250px;
+    }
+
+    .endgamewind__egbutton1 {
+        padding: 10px 7px;
+        width: 120px;
     }
 }
