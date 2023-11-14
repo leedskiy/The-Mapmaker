@@ -769,6 +769,8 @@ body {
     border-radius: 15px;
     z-index: 7;
     display: none;
+    opacity: 0;
+    transition: 0.5s;
 }
 
 .endgamewind-active {
@@ -779,12 +781,52 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     height: 100%;
     width: 100%;
+    padding: 20px;
 }
 
-.__container {
+.endgamewind__top {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+}
+
+.endgamewind__clbutton {
+    background-color: unset;
+    display: block;
+    cursor: pointer;
+    padding: 10px 8px;
+    border-radius: 50%;
+    transition: background-color 0.4s;
+}
+
+.clbutton__bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    border-radius: 5px;
+    margin: 5px auto;
+    position: relative;
+    background-color: #000000;
+}
+
+.clbutton__bar1 {
+    transform: rotate(45deg);
+    top: 4px;
+}
+
+.clbutton__bar2 {
+    transform: rotate(135deg);
+    bottom: 4px;
+}
+
+.endgamewind__body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .endgamewind__egtextbox {

@@ -183,8 +183,33 @@ export const displayController = (() => {
         const pointsManager = gameController.getPointsManager();
 
         egtext2Score.innerHTML = `${pointsManager.getPointsTotal()}`;
-        endgamewind.classList.add('endgamewind-active');
-        cover.style.cssText = `background-color: rgba(0, 0, 0, 0.5); z-index: 6;`;
+
+        setTimeout(() => {
+            endgamewind.classList.toggle('endgamewind-active');
+            requestAnimationFrame(function () {
+                requestAnimationFrame(function () {
+                    endgamewind.style.opacity = 1;
+                    cover.style.cssText = `background-color: rgba(0, 0, 0, 0.5); z-index: 6;`;
+                })
+            });
+        }, 200);
+    }
+
+    const hideGameEndScreen = () => {
+        const endgamewind = document.querySelector('.endgamewind');
+        const cover = document.querySelector('.cover');
+
+        endgamewind.style.opacity = 0;
+
+        setTimeout(() => {
+            requestAnimationFrame(function () {
+                endgamewind.addEventListener('transitionend', () => {
+                    endgamewind.classList.toggle('endgamewind-active');
+                }, { once: true });
+
+                cover.style.cssText = `background-color: rgba(0, 0, 0, 0.1); z-index: -76;`;
+            });
+        }, 200);
     }
 
     const updateHtml = () => {
@@ -204,17 +229,22 @@ export const displayController = (() => {
         const timeAndSeason = gameController.getTimeAndSeason();
         const missionsManager = gameController.getMissionsManager();
         const endgamewindEgbutton1 = document.querySelector('.endgamewind__egbutton1');
+        const endgamewindСlbutton = document.querySelector('.endgamewind__clbutton');
 
         rotateButton.addEventListener('click', () => {
-            currElem = gameController.getCurrElem();
-            currElem.rotate();
-            updateCurrElementHtml();
+            if (!timeAndSeason.getGameEnd()) {
+                currElem = gameController.getCurrElem();
+                currElem.rotate();
+                updateCurrElementHtml();
+            }
         });
 
         flipButton.addEventListener('click', () => {
-            currElem = gameController.getCurrElem();
-            currElem.flip();
-            updateCurrElementHtml();
+            if (!timeAndSeason.getGameEnd()) {
+                currElem = gameController.getCurrElem();
+                currElem.flip();
+                updateCurrElementHtml();
+            }
         });
 
         gridContainer.addEventListener('mousemove', (e) => {
@@ -226,18 +256,20 @@ export const displayController = (() => {
         });
 
         gridContainer.addEventListener('click', (e) => {
-            if (grid.addElementToGrid(e.target)) {
-                if (timeAndSeason.getCurrTime() + currElem.getTime() >= 7) {
-                    gameController.updateAllPoints();
+            if (!timeAndSeason.getGameEnd()) {
+                if (grid.addElementToGrid(e.target)) {
+                    if (timeAndSeason.getCurrTime() + currElem.getTime() >= 7) {
+                        gameController.updateAllPoints();
+                        missionsManager.updateCurrentSeasonLetters();
+                    }
+                    gameController.calcSeasonalMissionsPoints();
+                    gameController.updateCurrTime();
+                    gameController.updateCurrElementToNext();
                     missionsManager.updateCurrentSeasonLetters();
-                }
-                gameController.calcSeasonalMissionsPoints();
-                gameController.updateCurrTime();
-                gameController.updateCurrElementToNext();
-                missionsManager.updateCurrentSeasonLetters();
-                updateHtml();
-                if (timeAndSeason.getGameEnd()) {
-                    showGameEndScreen();
+                    updateHtml();
+                    if (timeAndSeason.getGameEnd()) {
+                        showGameEndScreen();
+                    }
                 }
             }
         });
@@ -247,16 +279,22 @@ export const displayController = (() => {
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.shiftKey && e.code === 'KeyR') {
-                currElem = gameController.getCurrElem();
-                currElem.rotate();
-                updateCurrElementHtml();
+            if (!timeAndSeason.getGameEnd()) {
+                if (e.shiftKey && e.code === 'KeyR') {
+                    currElem = gameController.getCurrElem();
+                    currElem.rotate();
+                    updateCurrElementHtml();
+                }
+                else if (e.shiftKey && e.code === 'KeyF') {
+                    currElem = gameController.getCurrElem();
+                    currElem.flip();
+                    updateCurrElementHtml();
+                }
             }
-            else if (e.shiftKey && e.code === 'KeyF') {
-                currElem = gameController.getCurrElem();
-                currElem.flip();
-                updateCurrElementHtml();
-            }
+        });
+
+        endgamewindСlbutton.addEventListener('click', (e) => {
+            hideGameEndScreen();
         });
     }
 
