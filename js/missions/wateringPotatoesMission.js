@@ -1,7 +1,7 @@
 import { Mission } from "./mission.js";
 import { gameController } from "../controllers/gameController.js";
 
-export class WateringPotatoes extends Mission {
+export class WateringPotatoesMission extends Mission {
     constructor(title, description, missionCost, seasonalLetter) {
         super(title, description, missionCost, seasonalLetter);
     }

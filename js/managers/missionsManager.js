@@ -5,10 +5,11 @@ import { SurroundedMountainDefaultMission } from "../missions/surroundedMountain
 import { BorderlandsMission } from "../missions/borderlandsMission.js";
 import { EdgeOfTheForestMission } from "../missions/edgeOfTheForestMission.js";
 import { SleepyValleyMission } from "../missions/sleepyValleyMission.js";
-import { WateringPotatoes } from "../missions/wateringPotatoes.js";
+import { WateringPotatoesMission } from "../missions/wateringPotatoesMission.js";
 
 import { TreeLineMission } from "../missions/treeLineMission.js";
 import { WateringCanal } from "../missions/wateringCanalMission.js";
+import { WealthyTownMission } from "../missions/wealthyTownMission.js";
 
 export class MissionsManager {
     #ssnlMissionsTotalPoints;
@@ -34,13 +35,15 @@ export class MissionsManager {
             missions["basic"][0].description, 1, 'A'));
         this.#fullMissionsList.push(new SleepyValleyMission(missions["basic"][1].title,
             missions["basic"][1].description, 4, 'A'));
-        this.#fullMissionsList.push(new WateringPotatoes(missions["basic"][2].title,
+        this.#fullMissionsList.push(new WateringPotatoesMission(missions["basic"][2].title,
             missions["basic"][2].description, 2, 'A'));
 
         this.#fullMissionsList.push(new TreeLineMission(missions["extra"][0].title,
             missions["extra"][0].description, 2, 'A'));
         this.#fullMissionsList.push(new WateringCanal(missions["extra"][1].title,
             missions["extra"][1].description, 4, 'A'));
+        this.#fullMissionsList.push(new WealthyTownMission(missions["extra"][2].title,
+            missions["extra"][2].description, 3, 'A'));
     }
 
     getFullMissionList = () => {
@@ -53,13 +56,14 @@ export class MissionsManager {
         this.#activeMissions.push(this.#fullMissionsList[0]);
         // this.#activeMissions.push(this.#fullMissionsList[1]);
         // temporary for testing
+        let newMissionName = "Wealthy town";
         this.#fullMissionsList.forEach(e => {
-            if (e.getTitle() === "Watering canal") {
+            if (e.getTitle() === newMissionName) {
                 this.#activeMissions.push(e);
             }
         })
         for (let i = 1; i < 3; i++) {
-            if (this.#fullMissionsList[i].getTitle() !== "Watering canal") {
+            if (this.#fullMissionsList[i].getTitle() !== newMissionName) {
                 this.#activeMissions.push(this.#fullMissionsList[i]);
             }
         }
