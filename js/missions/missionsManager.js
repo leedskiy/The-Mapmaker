@@ -8,17 +8,19 @@ import { SleepyValleyMission } from "./sleepyValleyMission.js";
 import { WateringPotatoes } from "./wateringPotatoes.js";
 
 export class MissionsManager {
-    #activeMissionsTotalPoints;
+    #ssnlMissionsTotalPoints;
     #activeMissions;
     #surrMountainMissionPoints;
     #surrMountainDefMission;
+    #currentSeasonLetters;
 
     #fullMissionsList;
 
     constructor() {
-        this.#activeMissionsTotalPoints = 0;
+        this.#ssnlMissionsTotalPoints = 0;
         this.#activeMissions = [];
         this.#surrMountainMissionPoints = 0;
+        this.#currentSeasonLetters = [];
         this.#surrMountainDefMission = new SurroundedMountainDefaultMission("Surrounded mountain",
             "If you surround the mountains on 4 sides, you get 1 point per surrounded mountain", 1, "no season");
 
@@ -45,27 +47,59 @@ export class MissionsManager {
         this.#activeMissions.push(this.#fullMissionsList[2]);
         this.#activeMissions.push(this.#fullMissionsList[3]);
 
-        this.#activeMissions[0].seasonalLetter = 'A';
-        this.#activeMissions[1].seasonalLetter = 'B';
-        this.#activeMissions[2].seasonalLetter = 'C';
-        this.#activeMissions[3].seasonalLetter = 'D';
+        this.#activeMissions[0].setSeasonalLetter('A');
+        this.#activeMissions[1].setSeasonalLetter('B');
+        this.#activeMissions[2].setSeasonalLetter('C');
+        this.#activeMissions[3].setSeasonalLetter('D');
     }
+
 
     getActiveMissions = () => {
         return this.#activeMissions;
     }
 
-    calcPtsFromActMissions = () => {
-        this.#activeMissionsTotalPoints = 0;
-        //seasons...
+    updateCurrentSeasonLetters = () => {
+        this.#currentSeasonLetters = [];
+        const timeAndSeason = gameController.getTimeAndSeason();
+
+        switch (timeAndSeason.getCurrSeason()) {
+            case 1:
+                this.#currentSeasonLetters.push('A');
+                this.#currentSeasonLetters.push('B');
+                break;
+            case 2:
+                this.#currentSeasonLetters.push('B');
+                this.#currentSeasonLetters.push('C');
+                break;
+            case 3:
+                this.#currentSeasonLetters.push('C');
+                this.#currentSeasonLetters.push('D');
+                break;
+            case 4:
+                this.#currentSeasonLetters.push('D');
+                this.#currentSeasonLetters.push('A');
+                break;
+        }
+    }
+
+    getCurrentSeasonLetters = () => {
+        return this.#currentSeasonLetters;
+    }
+
+    calcPtsFromSeasonalMissions = () => {
+        this.#ssnlMissionsTotalPoints = 0;
         this.#activeMissions.forEach(e => {
-            e.checkMissionFulfillment();
-            this.#activeMissionsTotalPoints += e.getCurrPoints();
+            if (this.#currentSeasonLetters[0] === e.getSeasonalLetter()
+                || this.#currentSeasonLetters[1] === e.getSeasonalLetter()
+            ) {
+                e.checkMissionFulfillment();
+                this.#ssnlMissionsTotalPoints += e.getCurrPoints();
+            }
         });
     }
 
-    getTtlPtsFromActMissions = () => {
-        return this.#activeMissionsTotalPoints;
+    getPtsFromSeasonalMissions = () => {
+        return this.#ssnlMissionsTotalPoints;
     }
 
     calcSurrMountMissionPts = () => {

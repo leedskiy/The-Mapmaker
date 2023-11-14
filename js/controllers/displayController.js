@@ -125,26 +125,26 @@ export const displayController = (() => {
             newElem.innerHTML = `
                 <div class="mission__mleft">
                     <img src="img/missions_pics/${imgName}_mission.png"
-                        class="mission__pic mission1__pic" alt="mission1_pic">
+                        class="mission__pic mission${i}__pic" alt="mission${i}_pic">
                 </div>
 
                 <div class="mission__mright">
                     <div class="mright__top">
-                        <h4 class="mright__title mission1__title">${activeMissions[i].getTitle()}</h4>
-                        <p class="mright__description mission1__description">
+                        <h4 class="mright__title mission${i}__title">${activeMissions[i].getTitle()}</h4>
+                        <p class="mright__description mission${i}__description">
                             ${activeMissions[i].getDescription()}
                         </p>
                     </div>
 
                     <div class="mright__mrbottom">
                         <div class="mrbottom__left">
-                            <p class="mrbottom__points mission1__points">(${activeMissions[i].getMissionCost() +
-                (activeMissions[i].getMissionCost() === 1 ? " point" : " points")})</p>
+                            <p class="mrbottom__points mission${i}__points">(${activeMissions[i].getCurrPoints() +
+                (activeMissions[i].getCurrPoints() === 1 ? " point" : " points")})</p>
                         </div>
 
                         <div class="mrbottom__right">
-                            <div class="mrbottom__status mission1__status"></div>
-                            <h4 class="mrbottom__letter mission1__letter">${activeMissions[i].getSeasonalLetter()}</h4>
+                            <div class="mrbottom__status mission${i}__status"></div>
+                            <h4 class="mrbottom__letter mission${i}__letter">${activeMissions[i].getSeasonalLetter()}</h4>
                         </div>
                     </div>
                 </div>
@@ -153,11 +153,35 @@ export const displayController = (() => {
         }
     }
 
+    const updateMissionsHtml = () => {
+        const mrbottomStatusHtml = document.querySelectorAll('.mrbottom__status');
+        const mrbottomPointsHtml = document.querySelectorAll('.mrbottom__points');
+        const missionsManager = gameController.getMissionsManager();
+        const activeMissions = missionsManager.getActiveMissions();
+        const currSeasonLetters = missionsManager.getCurrentSeasonLetters();
+
+        for (let i = 0; i < activeMissions.length; i++) {
+            if (
+                activeMissions[i].getSeasonalLetter() === currSeasonLetters[0] ||
+                activeMissions[i].getSeasonalLetter() === currSeasonLetters[1]
+            ) {
+                mrbottomStatusHtml[i].style.cssText = `display: block;`;
+            }
+            else {
+                mrbottomStatusHtml[i].style.cssText = `display: none;`;
+            }
+
+            mrbottomPointsHtml[i].innerHTML = `(${activeMissions[i].getCurrPoints() +
+                (activeMissions[i].getCurrPoints() === 1 ? " point" : " points")})`
+        }
+    }
+
     const updateHtml = () => {
         updateHtmlGrid();
         updateCurrElementHtml();
         updateTimeHtml();
         updatePointsHtml();
+        updateMissionsHtml();
     }
 
     const addEventListeners = () => {
@@ -166,6 +190,8 @@ export const displayController = (() => {
         let currElem = gameController.getCurrElem();
         const gridContainer = document.querySelector('.grid__container');
         const grid = gameController.getGrid();
+        const timeAndSeason = gameController.getTimeAndSeason();
+        const missionsManager = gameController.getMissionsManager();
 
         rotateButton.addEventListener('click', () => {
             currElem = gameController.getCurrElem();
@@ -189,9 +215,15 @@ export const displayController = (() => {
 
         gridContainer.addEventListener('click', (e) => {
             if (grid.addElementToGrid(e.target)) {
-                gameController.updateCurrPoints();
+                if (timeAndSeason.getCurrTime() + currElem.getTime() >= 7) {
+                    gameController.updateAllPoints();
+                    missionsManager.updateCurrentSeasonLetters();
+                }
+
+                gameController.calcSeasonalMissionsPoints();
                 gameController.updateCurrTime();
                 gameController.updateCurrElementToNext();
+                missionsManager.updateCurrentSeasonLetters();
                 updateHtml();
             }
         });

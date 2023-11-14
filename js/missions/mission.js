@@ -69,5 +69,9 @@ export class Mission {
         return this._seasonalLetter;
     }
 
+    setSeasonalLetter = (seasonalLetter) => {
+        this._seasonalLetter = seasonalLetter;
+    }
+
     checkMissionFulfillment = () => { }
 }

@@ -17,15 +17,16 @@ export class PointsManager {
         switch (currSeason) {
             case 1:
                 this.#seasonalPoints[0] = points;
+                break;
             case 2:
-                newPoints = points - this.#seasonalPoints[0];
-                this.#seasonalPoints[1] = newPoints;
+                this.#seasonalPoints[1] = points;
+                break;
             case 3:
-                newPoints = points - this.#seasonalPoints[0] - this.#seasonalPoints[1];
-                this.#seasonalPoints[2] = newPoints;
+                this.#seasonalPoints[2] = points;
+                break;
             case 4:
-                newPoints = points - this.#seasonalPoints[0] - this.#seasonalPoints[1] - this.#seasonalPoints[2];
-                this.#seasonalPoints[3] = newPoints;
+                this.#seasonalPoints[3] = points;
+                break;
         }
     }
 

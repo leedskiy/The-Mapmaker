@@ -59,9 +59,9 @@ export const gameController = (() => {
         timeAndSeason.adjustCurrTime(currElem.getTime());
     }
 
-    const calcActMissionsPoints = () => {
-        missionsManager.calcPtsFromActMissions();
-        return missionsManager.getTtlPtsFromActMissions();
+    const calcSeasonalMissionsPoints = () => {
+        missionsManager.calcPtsFromSeasonalMissions();
+        return missionsManager.getPtsFromSeasonalMissions();
     }
 
     const calcSurrMountMissionPoints = () => {
@@ -69,8 +69,8 @@ export const gameController = (() => {
         return missionsManager.getSurrMountainMissionPoints();
     }
 
-    const updateCurrPoints = () => {
-        const points = calcActMissionsPoints() + calcSurrMountMissionPoints();
+    const updateAllPoints = () => {
+        const points = calcSeasonalMissionsPoints() + calcSurrMountMissionPoints();
         pointsManager.setCurrSeasonPoints(points);
         pointsManager.calculatePointsTotal();
     }
@@ -79,7 +79,8 @@ export const gameController = (() => {
         randomizeArray(elements);
         updateCurrElementToNext();
         missionsManager.updateActiveMissions();
-        updateCurrPoints();
+        missionsManager.updateCurrentSeasonLetters();
+        updateAllPoints();
         displayController.initializeMissionsHtml();
         displayController.updateHtml();
         displayController.addEventListeners();
@@ -87,7 +88,8 @@ export const gameController = (() => {
 
     return {
         getCurrElem, getGrid, getTimeAndSeason, getMissionsManager, getPointsManager,
-        randomizeArray, updateCurrElementToNext, updateCurrTime, updateCurrPoints,
+        calcSeasonalMissionsPoints, randomizeArray,
+        updateCurrElementToNext, updateCurrTime, updateAllPoints,
         startGame
     }
 })();
