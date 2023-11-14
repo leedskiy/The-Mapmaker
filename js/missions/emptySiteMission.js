@@ -79,8 +79,6 @@ export class EmptySiteMission extends Mission {
                             this.currPoints += this.missionCost;
                         }
                     }
-
-                    console.log(checkedFields);
                 }
             }
         }
