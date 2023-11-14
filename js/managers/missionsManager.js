@@ -7,6 +7,8 @@ import { EdgeOfTheForestMission } from "../missions/edgeOfTheForestMission.js";
 import { SleepyValleyMission } from "../missions/sleepyValleyMission.js";
 import { WateringPotatoes } from "../missions/wateringPotatoes.js";
 
+import { TreeLineMission } from "../missions/treeLineMission.js";
+
 export class MissionsManager {
     #ssnlMissionsTotalPoints;
     #activeMissions;
@@ -33,6 +35,9 @@ export class MissionsManager {
             missions["basic"][1].description, 4, 'A'));
         this.#fullMissionsList.push(new WateringPotatoes(missions["basic"][2].title,
             missions["basic"][2].description, 2, 'A'));
+
+        this.#fullMissionsList.push(new TreeLineMission(missions["extra"][0].title,
+            missions["extra"][0].description, 2, 'A'));
     }
 
     getFullMissionList = () => {
@@ -43,9 +48,20 @@ export class MissionsManager {
         gameController.randomizeArray(this.#fullMissionsList);
 
         this.#activeMissions.push(this.#fullMissionsList[0]);
-        this.#activeMissions.push(this.#fullMissionsList[1]);
-        this.#activeMissions.push(this.#fullMissionsList[2]);
-        this.#activeMissions.push(this.#fullMissionsList[3]);
+        // this.#activeMissions.push(this.#fullMissionsList[1]);
+        // temporary for testing
+        this.#fullMissionsList.forEach(e => {
+            if (e.getTitle() === "Tree line") {
+                this.#activeMissions.push(e);
+            }
+        })
+        for (let i = 1; i < 3; i++) {
+            if (this.#fullMissionsList[i].getTitle() !== "Tree line") {
+                this.#activeMissions.push(this.#fullMissionsList[i]);
+            }
+        }
+        // this.#activeMissions.push(this.#fullMissionsList[2]);
+        // this.#activeMissions.push(this.#fullMissionsList[3]);
 
         this.#activeMissions[0].setSeasonalLetter('A');
         this.#activeMissions[1].setSeasonalLetter('B');

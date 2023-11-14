@@ -175,7 +175,7 @@ body {
 
 .__container {
     max-width: 1420px;
-    padding: 40px;
+    padding: 20px 40px;
     margin: 0 auto;
 }
 
@@ -281,7 +281,7 @@ body {
     border-radius: 3px;
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1300px){
     .main__container {
         flex-direction: column;
     }
@@ -405,7 +405,7 @@ body {
 .right__separator2 {
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1300px){
     .right__section1 {
         order: 3;
     }
@@ -427,7 +427,7 @@ body {
     }
 }
 
-@media(max-width: 700px){
+@media(max-width: 800px){
     .section1__cards {
         display: grid;
         grid-template-rows: repeat(2, 1fr);
@@ -458,10 +458,10 @@ body {
     color: #ffffff;
     display: grid;
     grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 300px);
+    grid-auto-rows: 1fr;
+    grid-template-columns: repeat(2, 350px);
     gap: 10px;
     justify-content: center;
-    align-items: center;
 }
 
 .missions__mission {
@@ -624,7 +624,7 @@ body {
 .timeinfo__time {
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1300px){
     .right__section2 {
         order: 5;
     }
@@ -637,7 +637,7 @@ body {
     }
 }
 
-@media(max-width: 700px){
+@media(max-width: 800px){
     .section2__missions {
         grid-template-rows: repeat(4, 1fr);
         grid-template-columns: repeat(1, 300px);
@@ -738,7 +738,7 @@ body {
 .s3grid__elem {
 }
 
-@media(max-width: 1200px){
+@media(max-width: 1300px){
     .right__section3 {
         order: 1;
         align-items: center;
