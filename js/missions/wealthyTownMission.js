@@ -57,7 +57,6 @@ export class WealthyTownMission extends Mission {
                     }
 
                     if (typesAround.length >= 3) {
-                        console.log(gridArray[i][j]);
                         this.currPoints += this.missionCost;
                     }
                 }

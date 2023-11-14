@@ -86,15 +86,17 @@ export const displayController = (() => {
         const timeinfoTimeHtml = document.querySelector('.timeinfo__time');
         const seasoninfoSeasonHtml = document.querySelector('.seasoninfo__season');
         const timeAndSeason = gameController.getTimeAndSeason();
+        const missionsManager = gameController.getMissionsManager();
+        const currentSeasonLetters = missionsManager.getCurrentSeasonLetters();
 
         elemTimeValueHtml.innerHTML = `${currElem.getTime()}`;
         timeinfoTimeHtml.innerHTML = timeAndSeason.getCurrTime();
 
         seasoninfoSeasonHtml.innerHTML =
-            timeAndSeason.getCurrSeason() === 1 ? "Spring (A, B)" :
-                timeAndSeason.getCurrSeason() === 2 ? "Summer (B, C)" :
-                    timeAndSeason.getCurrSeason() === 3 ? "Autumn (C, D)" :
-                        timeAndSeason.getCurrSeason() === 4 ? "Winter (D, A)" :
+            timeAndSeason.getCurrSeason() === 1 ? `Spring (${currentSeasonLetters[0]}, ${currentSeasonLetters[1]})` :
+                timeAndSeason.getCurrSeason() === 2 ? `Summer (${currentSeasonLetters[0]}, ${currentSeasonLetters[1]})` :
+                    timeAndSeason.getCurrSeason() === 3 ? `Autumn (${currentSeasonLetters[0]}, ${currentSeasonLetters[1]})` :
+                        timeAndSeason.getCurrSeason() === 4 ? `Winter (${currentSeasonLetters[0]}, ${currentSeasonLetters[1]})` :
                             "End";
     }
 

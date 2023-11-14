@@ -25,10 +25,6 @@ export class WateringCanal extends Mission {
                 }
             }
 
-            console.log("waterTypeCount", waterTypeCount);
-            console.log("plainsTypeCount", plainsTypeCount);
-            console.log("\n\n");
-
             if (waterTypeCount > 0 && plainsTypeCount > 0 && waterTypeCount === plainsTypeCount) {
                 this.currPoints += this.missionCost;
             }
