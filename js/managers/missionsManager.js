@@ -8,6 +8,7 @@ import { SleepyValleyMission } from "../missions/sleepyValleyMission.js";
 import { WateringPotatoes } from "../missions/wateringPotatoes.js";
 
 import { TreeLineMission } from "../missions/treeLineMission.js";
+import { WateringCanal } from "../missions/wateringCanalMission.js";
 
 export class MissionsManager {
     #ssnlMissionsTotalPoints;
@@ -38,6 +39,8 @@ export class MissionsManager {
 
         this.#fullMissionsList.push(new TreeLineMission(missions["extra"][0].title,
             missions["extra"][0].description, 2, 'A'));
+        this.#fullMissionsList.push(new WateringCanal(missions["extra"][1].title,
+            missions["extra"][1].description, 4, 'A'));
     }
 
     getFullMissionList = () => {
@@ -51,12 +54,12 @@ export class MissionsManager {
         // this.#activeMissions.push(this.#fullMissionsList[1]);
         // temporary for testing
         this.#fullMissionsList.forEach(e => {
-            if (e.getTitle() === "Tree line") {
+            if (e.getTitle() === "Watering canal") {
                 this.#activeMissions.push(e);
             }
         })
         for (let i = 1; i < 3; i++) {
-            if (this.#fullMissionsList[i].getTitle() !== "Tree line") {
+            if (this.#fullMissionsList[i].getTitle() !== "Watering canal") {
                 this.#activeMissions.push(this.#fullMissionsList[i]);
             }
         }
