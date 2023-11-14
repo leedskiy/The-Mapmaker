@@ -177,9 +177,14 @@ export const displayController = (() => {
     }
 
     const showGameEndScreen = () => {
-        // temporary
+        const endgamewind = document.querySelector('.endgamewind');
+        const egtext2Score = document.querySelector('.egtext2__score');
+        const cover = document.querySelector('.cover');
         const pointsManager = gameController.getPointsManager();
-        alert(`game end\nyour score is ${pointsManager.getPointsTotal()}`);
+
+        egtext2Score.innerHTML = `${pointsManager.getPointsTotal()}`;
+        endgamewind.classList.add('endgamewind-active');
+        cover.style.cssText = `background-color: rgba(0, 0, 0, 0.5); z-index: 6;`;
     }
 
     const updateHtml = () => {
@@ -198,6 +203,7 @@ export const displayController = (() => {
         const grid = gameController.getGrid();
         const timeAndSeason = gameController.getTimeAndSeason();
         const missionsManager = gameController.getMissionsManager();
+        const endgamewindEgbutton1 = document.querySelector('.endgamewind__egbutton1');
 
         rotateButton.addEventListener('click', () => {
             currElem = gameController.getCurrElem();
@@ -234,6 +240,10 @@ export const displayController = (() => {
                     showGameEndScreen();
                 }
             }
+        });
+
+        endgamewindEgbutton1.addEventListener('click', (e) => {
+            location.reload();
         });
     }
 
