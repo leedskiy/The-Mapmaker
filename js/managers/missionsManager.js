@@ -14,6 +14,7 @@ import { MagiciansValleyMission } from "../missions/magiciansValleyMission.js";
 import { EmptySiteMission } from "../missions/emptySiteMission.js";
 import { TerracedHouseMission } from "../missions/terracedHouseMission.js";
 import { OddNumberedSilosMission } from "../missions/oddNumberedSilosMission.js";
+import { RichCountrysideMission } from "../missions/richCountrysideMission.js";
 
 export class MissionsManager {
     #ssnlMissionsTotalPoints;
@@ -21,7 +22,6 @@ export class MissionsManager {
     #surrMountainMissionPoints;
     #surrMountainDefMission;
     #currentSeasonLetters;
-
     #fullMissionsList;
 
     constructor() {
@@ -29,10 +29,11 @@ export class MissionsManager {
         this.#activeMissions = [];
         this.#surrMountainMissionPoints = 0;
         this.#currentSeasonLetters = [];
+        this.#fullMissionsList = [];
+
         this.#surrMountainDefMission = new SurroundedMountainDefaultMission("Surrounded mountain",
             "If you surround the mountains on 4 sides, you get 1 point per surrounded mountain", 1, "no season");
 
-        this.#fullMissionsList = [];
         this.#fullMissionsList.push(new BorderlandsMission(missions["basic"][3].title,
             missions["basic"][3].description, 6, 'A'));
         this.#fullMissionsList.push(new EdgeOfTheForestMission(missions["basic"][0].title,
@@ -56,6 +57,8 @@ export class MissionsManager {
             missions["extra"][5].description, 2, 'A'));
         this.#fullMissionsList.push(new OddNumberedSilosMission(missions["extra"][6].title,
             missions["extra"][6].description, 10, 'A'));
+        this.#fullMissionsList.push(new RichCountrysideMission(missions["extra"][7].title,
+            missions["extra"][7].description, 4, 'A'));
     }
 
     getFullMissionList = () => {
@@ -66,21 +69,9 @@ export class MissionsManager {
         gameController.randomizeArray(this.#fullMissionsList);
 
         this.#activeMissions.push(this.#fullMissionsList[0]);
-        // this.#activeMissions.push(this.#fullMissionsList[1]);
-        // temporary for testing
-        let newMissionName = "Odd numbered silos";
-        this.#fullMissionsList.forEach(e => {
-            if (e.getTitle() === newMissionName) {
-                this.#activeMissions.push(e);
-            }
-        })
-        for (let i = 1; i < 3; i++) {
-            if (this.#fullMissionsList[i].getTitle() !== newMissionName) {
-                this.#activeMissions.push(this.#fullMissionsList[i]);
-            }
-        }
-        // this.#activeMissions.push(this.#fullMissionsList[2]);
-        // this.#activeMissions.push(this.#fullMissionsList[3]);
+        this.#activeMissions.push(this.#fullMissionsList[1]);
+        this.#activeMissions.push(this.#fullMissionsList[2]);
+        this.#activeMissions.push(this.#fullMissionsList[3]);
 
         this.#activeMissions[0].setSeasonalLetter('A');
         this.#activeMissions[1].setSeasonalLetter('B');
