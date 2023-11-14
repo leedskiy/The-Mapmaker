@@ -1,5 +1,5 @@
 import { GridCell } from "./gridCell.js";
-import { mountains } from "../data/mountains.js";
+import { mountains } from "../data/mountainsData.js";
 import { gameController } from "../controllers/gameController.js";
 
 export class GridClass {

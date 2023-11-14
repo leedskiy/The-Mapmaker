@@ -1,10 +1,10 @@
 import { GridClass } from "../grid/grid.js";
 import { Element } from "../element/element.js";
-import { elements } from "../data/elements.js";
+import { elements } from "../data/elementsData.js";
 import { displayController } from "./displayController.js";
-import { TimeManager } from "../time and points/timeManager.js";
-import { MissionsManager } from "../missions/missionsManager.js";
-import { PointsManager } from "../time and points/pointsManager.js";
+import { TimeManager } from "../managers/timeManager.js";
+import { MissionsManager } from "../managers/missionsManager.js";
+import { PointsManager } from "../managers/pointsManager.js";
 
 export const gameController = (() => {
     let currElem;

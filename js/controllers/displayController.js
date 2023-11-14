@@ -176,6 +176,12 @@ export const displayController = (() => {
         }
     }
 
+    const showGameEndScreen = () => {
+        // temporary
+        const pointsManager = gameController.getPointsManager();
+        alert(`game end\nyour score is ${pointsManager.getPointsTotal()}`);
+    }
+
     const updateHtml = () => {
         updateHtmlGrid();
         updateCurrElementHtml();
@@ -219,12 +225,14 @@ export const displayController = (() => {
                     gameController.updateAllPoints();
                     missionsManager.updateCurrentSeasonLetters();
                 }
-
                 gameController.calcSeasonalMissionsPoints();
                 gameController.updateCurrTime();
                 gameController.updateCurrElementToNext();
                 missionsManager.updateCurrentSeasonLetters();
                 updateHtml();
+                if (timeAndSeason.getGameEnd()) {
+                    showGameEndScreen();
+                }
             }
         });
     }

@@ -1,11 +1,11 @@
-import { missions } from "../data/missions.js";
+import { missions } from "../data/missionsData.js";
 import { gameController } from "../controllers/gameController.js";
-import { SurroundedMountainDefaultMission } from "./surroundedMountainDefaultMission.js";
+import { SurroundedMountainDefaultMission } from "../missions/surroundedMountainDefaultMission.js";
 
-import { BorderlandsMission } from "./borderlandsMission.js";
-import { EdgeOfTheForestMission } from "./edgeOfTheForestMission.js";
-import { SleepyValleyMission } from "./sleepyValleyMission.js";
-import { WateringPotatoes } from "./wateringPotatoes.js";
+import { BorderlandsMission } from "../missions/borderlandsMission.js";
+import { EdgeOfTheForestMission } from "../missions/edgeOfTheForestMission.js";
+import { SleepyValleyMission } from "../missions/sleepyValleyMission.js";
+import { WateringPotatoes } from "../missions/wateringPotatoes.js";
 
 export class MissionsManager {
     #ssnlMissionsTotalPoints;

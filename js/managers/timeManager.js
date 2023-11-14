@@ -1,10 +1,12 @@
 export class TimeManager {
     #currTime;
     #currSeason;
+    #gameEnd;
 
     constructor() {
         this.#currTime = 0;
         this.#currSeason = 1;
+        this.#gameEnd = false;
     }
 
     getCurrTime = () => {
@@ -16,6 +18,9 @@ export class TimeManager {
             if (this.#currSeason + 1 <= 4) {
                 this.#currSeason += 1;
             }
+            else {
+                this.#gameEnd = true;
+            }
 
             this.#currTime = 0;
         }
@@ -26,5 +31,13 @@ export class TimeManager {
 
     getCurrSeason = () => {
         return this.#currSeason;
+    }
+
+    getGameEnd = () => {
+        return this.#gameEnd;
+    }
+
+    setGameEnd = (gameEnd) => {
+        this.#gameEnd = gameEnd;
     }
 }
