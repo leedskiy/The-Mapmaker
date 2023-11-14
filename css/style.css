@@ -212,9 +212,9 @@ body {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.1);
-    display: none;
     z-index: -76;
     display: block;
+    position: fixed;
 }
 
 .background {
@@ -285,9 +285,12 @@ body {
     .main__container {
         flex-direction: column;
     }
+    .left__title {
+        text-align: center;
+    }
     .gelem {
-        height: 25px;
-        width: 25px;
+        height: 30px;
+        width: 30px;
     }
 }
 
@@ -405,12 +408,15 @@ body {
 @media(max-width: 1200px){
     .right__section1 {
         order: 3;
-    }  
+    }
     .section1__cards {
         order: 2;
     }
     .section1__counter {
         order: 1;
+    }
+    .section1__bottom {
+        text-align: center;
     }
     .right__separator1 {
         order: 2;
@@ -611,6 +617,10 @@ body {
 .section2__timeinfo {
 }
 
+.timeinfo_nowrap {
+    text-wrap: nowrap;
+}
+
 .timeinfo__time {
 }
 
@@ -623,6 +633,7 @@ body {
     }
     .section2__bottom {
         order: 1;
+        text-align: center;
     }
 }
 
@@ -800,7 +811,7 @@ body {
 }
 
 .endgamewind__egbutton1 {
-    padding: 10px;
+    padding: 15px;
     width: 140px;
     border-radius: 10px;
 }
@@ -811,12 +822,14 @@ body {
 @media(max-width: 600px){
     .endgamewind {
         width: 300px;
+        height: 400px;
     }
 }
 
 @media(max-width: 426px){
     .endgamewind {
         width: 250px;
+        height: 300px;
     }
 
     .endgamewind__egbutton1 {
