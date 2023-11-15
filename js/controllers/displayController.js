@@ -195,6 +195,15 @@ export const displayController = (() => {
                 })
             });
         }, 200);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Escape') {
+                hideGameEndScreen();
+            }
+            else if (e.shiftKey && e.altKey && e.code === 'KeyR') {
+                location.reload();
+            }
+        }, { once: true });
     }
 
     const hideGameEndScreen = () => {
