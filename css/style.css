@@ -175,7 +175,7 @@ body {
 
 .__container {
     max-width: 1420px;
-    padding: 20px 40px;
+    padding: 0px 40px;
     margin: 0 auto;
 }
 
@@ -201,7 +201,7 @@ body {
     }
 
     .__container {
-        padding: 30px;
+        padding: 0 30px;
     }
 }
 
@@ -246,6 +246,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 30px;
+    padding: 50px 40px;
 }
 
 .main__left {
@@ -255,7 +256,27 @@ body {
     gap: 15px;
 }
 
+.main__top {
+    display: flex;
+    gap: 20px;
+    align-items: end;
+}
+
 .left__title {
+}
+
+.main__logo {
+    margin: 0 0 4px 0;
+}
+
+.logo__pic {
+}
+
+.logo {
+    width: 50px;
+}
+
+.left__name {
 }
 
 .left__grid {
@@ -285,7 +306,13 @@ body {
     .main__container {
         flex-direction: column;
     }
+    .main__top {
+        justify-content: center;
+    }
     .left__title {
+        text-align: center;
+    }
+    .left__name {
         text-align: center;
     }
     .gelem {
@@ -295,6 +322,15 @@ body {
 }
 
 @media(max-width: 426px){
+    .main__container {
+        padding: 50px 30px;
+    }
+    .main__top {
+        gap: 10px;
+    }
+    .logo {
+        width: 30px;
+    }
     .gelem {
         height: 20px;
         width: 20px;
