@@ -270,6 +270,7 @@ body {
 }
 
 .logo__pic {
+    width: 50px;
 }
 
 .logo {
@@ -914,4 +915,36 @@ body {
         padding: 10px 7px;
         width: 120px;
     }
+}
+
+/*------------------------footer------------------------*/
+
+.footer {
+    width: 100%;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.2);
+    height: 70px;
+    background-color: #363636;
+}
+
+.footer__container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.footer__text {
+    position: relative;
+}
+
+.footer__link {
+}
+
+.footer__text::before {
+    transition: transform 0.7s, background-color 0.6s;
+}
+  
+.footer__text:hover::before {
+    transition: transform 0.7s, background-color 0.6s;
 }

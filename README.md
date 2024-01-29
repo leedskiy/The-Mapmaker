@@ -1,6 +1,8 @@
 # The mapmaker
 In the neighbour of Neverfindland there is a big country, the Potato Empire, many parts of which are still unknown and uninhabited. Its ruler, Empress French Frie, ordered the mapping and settlement of these areas. As a first step, she commissioned you as imperial mapmaker to discover the landscape. The Empress sets missions to determine what landscapes she wants to see in her empire. Help her to fulfil her wishes as much as possible, so that your reputation can grow accordingly!
 
+**link: https://leedskiy.github.io/The-Mapmaker/**
+
 ![game_pic](./img_readme/1.png)
 
 ## Description of the game
